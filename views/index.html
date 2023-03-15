@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Expense Tracker</h1>
+    <div class="nav">
+        <form id="form" method="POST" onsubmit="addExpense(event)">
+            <label>Date</label>
+            <input type="date" name="date" id="date">
+            <label>Category</label>
+            <select name="category" id="category">
+                <option value="Personal">Personal</option>
+                <option value="Savings">Savings</option>
+                <option value="Payments">Payments</option>
+                <option value="Shopping">Shopping</option>
+            </select>
+            <label>Description</label>
+            <input type="text" name="description" id="description">
+            <label>Amount</label>
+            <input type="number" name="amount" id="amount">
+            <button id="submitbtn" type="submit">Submit</button>
+        </form>
+        <a id="but"></a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Desciption</th>
+                    <th>Amount</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="expenseTable">
+
+            </tbody>
+            <h3 id="total"></h3>
+        </table>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+<script src="/js/index.js"></script>
+
+</html>
