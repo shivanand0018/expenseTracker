@@ -1,19 +1,25 @@
-const express = require('express')
-const path = require('path')
-const cors = require('cors')
+const path = require('path');
+
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const errorController = require('./controllers/error');
+const db = require('./util/database');
 
 const app = express();
-const bodyparser = require('body-parser')
 
-app.use(express.json())
-app.use(bodyparser.urlencoded({ extended: false }))
-app.use(cors())
-app.use(express.static(path.join(__dirname, 'public')))
-const sequelize = require('./util/database')
-const homeRoutes = require('./routes/home');
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
-app.use('/home', homeRoutes)
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-sequelize.sync().then(result => {
-    app.listen('3000')
-})
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
+
+app.use(errorController.get404);
+
+app.listen(3000);
